@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/custom.css">
+    <link rel="shortcut icon" href="../assets/favicon_Mesa 1.png" type="image/x-icon">
+    <title>Contacto | Franco PetShop</title>
+</head>
+
+<body>
+    <div id="app">
+<!-- ========================== Header ========================== -->
+<header>
+        <div><img src="../assets/logooficial_Mesa 1_Mesa 1.png" alt="logo pet shop" id="logo_header"></div>
+        <div><h1>Franco's Pet Shop</h1></div>
+        <div>        
+            <button type="button" class="btn d-flex text-wrap align-items-center justify-content-around"data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"aria-controls="offcanvasRight" id="boton_carrito">
+                <span class="carritoCompras"> Carrito de compras </span><p id="carrito_sup"><span id="nro_sup">{{productos_carrito.length}}</span></p>
+                <span class="verCarrito">Ver carrito</span><img src="../assets/gato_carrito_Mesa 1_Mesa 1.png">
+            </button>
+        </div>
+    </header>
+        
+<!-- ========================== Nav ========================== -->
+
+        <nav>
+            <a class="a_nav" href="../index.html"><img src="../assets/inicio_15x15.png" class ="iconos_nav">Inicio</a>
+            <a class="a_nav" href="./farmacia.html"><img src="../assets/farmacia_15x15.png" class ="iconos_nav">Farmacia</a>
+            <a class="a_nav" href="./juguetes.html"><img src="../assets/juguetes_15x15.png"class ="iconos_nav">Juguetes</a>
+            <a class="a_nav" href="#" id="pushed"><img src="../assets/contactos_15x15.png"class ="iconos_nav">Contáctenos</a>
+        </nav>
+
+<!-- ========================== Carrito ========================== -->
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Mis productos:</h5>
+        <button type="button" class="btn-close text-reset boton_canvas" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" v-if="productos_carrito.length == 0">
+        <p class="opacity-50">Todavía no hay productos en su carrito de compras.</p>
+    </div>
+    <div class="offcanvas-body" v-else>
+        <div class="card mb-2 tarjetas_carrito cardsJuguetes" style="max-width: 540px;" v-for="tarjeta in productos_carrito">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img v-bind:src="tarjeta.imagen" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-tittle">{{tarjeta.nombre}}</h5>
+                        <p class="card-text">${{tarjeta.precio}}</p>
+                        <p class="card-text"><small>Cantidad de unidades: {{tarjeta.__v}}</small></p>
+                        <p class="card-text"><small>Subtotal: $ {{subtotalIndividual(tarjeta)}}</small></p>
+                        <button type="button" class="btn-close text-reset quitar_carrito" @click="quitarProductoCarrito(tarjeta)"
+                        aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <h5>Total de la compra: $ {{subtotalTotal}} </h5>
+    </div>
+    <a href="#" class="btn btn-primary botonFinalizarCompra"data-bs-toggle="modal"
+    data-bs-target="#exampleModalEasterEgg"> Finalizar Compra</a>
+</div>
+<!-- =================================================================== -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalEasterEgg" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog easterEgg_modal">
+        <div class="modal-content">
+                
+            <img src="../assets/Boceto Index2_Mesa 1.png" id="easterEgg_modal"alt="EasterEgg_modal">
+            
+        </div>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<!-- Modal -->
+<!-- ========================== Main ========================== -->
+
+        <main class="d-flex justify-content-around responsiveMainContacto">
+            <!----------------------- [ Menu hamburguesa ] ----------------------->        
+        <div id="hamburguesa">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="p-4">
+                    <a class="a_nav" href="../index.html"><img src="../assets/inicio_15x15.png" class ="iconos_nav">Inicio</a>
+                    <a class="a_nav" href="./farmacia.html"><img src="../assets/farmacia_15x15.png" class ="iconos_nav">Farmacia</a>
+                    <a class="a_nav" href="./juguetes.html"><img src="../assets/juguetes_15x15.png"class ="iconos_nav">Juguetes</a>
+                    <a class="a_nav" href="#" id="pushed"><img src="../assets/contactos_15x15.png"class ="iconos_nav">Contáctenos</a>
+                    </div>
+                </div>
+                <nav id="menu_hamburguesa" class="navbar navbar-dark">
+                    <div id="container_fluid">
+                        <button id="boton_hamburguesa" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    
+                </nav>
+            </div>
+
+
+            <form action="#" id="form" class="d-flex flex-column py-4 px-4">
+                <legend>Elegí tu mascota:</legend>
+                <div class="d-flex justify-content-center">
+                    <input type="radio" name="Gato" id="radio_gato" required value="gato" class="btn-check"></input>
+                    <label for="radio_gato" class="btn ">
+                        <img src="../assets/form_gato_Mesa 1.png" alt="gatito" class="foto_radio">
+                    </label>
+                    <input type="radio" name="Perro" id="radio_perro" required value="perro" class="btn-check"></input>
+                    <label for="radio_perro" class="btn">
+                        <img src="../assets/form_perro_Mesa 1.png" alt="perrito" class="foto_radio">
+                    </label>
+                </div>
+
+
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="user_first_name" placeholder="Ingrese su nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="user_last_name" placeholder="Ingrese su apellido" required>
+
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="user_phone" placeholder="Nro de teléfono sin espacios ni guiones"
+                    required>
+
+                <label for="mascota">Nombre mascota: </label>
+                <input type="text" id="mascota" name="pet_name" placeholder="Nombre de su mascota">
+
+                <label for="mail">Correo electrónico:</label>
+                <input type="email" id="mail" name="user_mail" placeholder="Ingrese su correo electrónico">
+
+                <label for="msg" class="my2">Mensaje:</label>
+                <textarea id="msg" name="user_message" rows="5" placeholder="Dejanos tu mensaje!"></textarea>
+
+                <button type="submit" class="my-2 py-2 btn boton_carrito" id="my_input" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">Envianos tu consulta</button>
+            </form>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modalContacto ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Muchas gracias!</h5>
+                            <button type="button" class="btn-close boton_carrito" data-bs-dismiss="modal" aria-label="Close"
+                                v-on:click="modal_contacto"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p>Su mensaje ha sido enviado con éxito.</p>
+                            <p>Pronto nos estaremos comunicando!</p>
+                            <img src="../assets/perros_formulario_enviado_Mesa1.png" id="perro_modal"
+                                alt="schnauser_modal">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn boton_carrito" data-bs-dismiss="modal"
+                                v-on:click="modal_contacto">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+
+            <div class="mt-5">
+                <div class="py-2 px-2 responsiveContacto--divContactanos">
+                    <h5>Contactanos:</h5>
+                    <p>Atención Teléfonica: 011-220-2345</p>
+                    <p>Atención Whatsapp: +54-911-534-620</p>
+                    <p class="horaDom">Lunes a Sábados de 9 a 21 hs</p>
+                    <p class="horaDom">Domingos de 10 a 20 hs</p>
+                </div>
+                <div class="py-2 px-2 contenedorEncontranos">
+                    <h5>Encontranos en:</h5>
+                    <img src="../assets/perro_maps_Mesa 1.png" alt="huellas" class="perroUbicacion">
+                    <div class="contenedorDeMapa">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.6871004428513!2d-58.432572384236636!3d-34.6120729654484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca429815227f%3A0x5d302e497c2cda87!2sR%C3%ADo%20de%20Janeiro%20300%2C%20C1405CCB%20CABA!5e0!3m2!1ses-419!2sar!4v1650046491404!5m2!1ses-419!2sar" 
+                        width="450" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="mapDireccion"></iframe>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+<!-- ========================== Footer ========================== -->
+
+        <footer class="py-3">
+            <div class="col-2 div--footer">
+                <div class="text-center footer_font--style mb-1">Seguinos en nuestras redes</div>
+                <div class="d-flex d-grid gap-1">
+                    <a href=""><img src="../assets/whatsapp_15x15.png" alt=""></a>
+                    <a href=""><img src="../assets/mail_15x15.png" alt=""></a>
+                    <a href=""><img src="../assets/facebook_15x15.png" alt=""></a>   
+                    <a href=""><img src="../assets/instagram_15x15.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-2 text-center footer_font--style">
+                Encontranos en: Río de Janeiro 300, Bs. As. Argentina
+            </div>
+            <div class="col-2 div--footer">
+                <div class="text-center footer_font--style">Formas de pago<img src="../assets/tarjetas_Mesa 1.png" alt="" id="tarjetas"></div>
+            </div>
+
+        </footer>
+    </div>
+
+    <!-- Bootstrap Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+    <!-- Vue y Codigos Scripts -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="../scripts/main.js"></script>
+</body>
+
+</html>
